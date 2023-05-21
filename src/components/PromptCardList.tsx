@@ -40,34 +40,36 @@ const PromptCardList = ({ data, handleTagClick }: PromptListProps) => {
         const promptID = _id?.toString();
 
         return (
-          <div key={_id} className="prompt-card">
-            <div className="flex justify-between mb-4">
-              <div className="flex gap-2 justify-center items-center">
-                <Avatar author={author} />
-                <span className="text-sm">{author}</span>
+          <div key={_id} className="relative">
+            <div className="prompt-card">
+              <div className="flex justify-between mb-4">
+                <div className="flex gap-2 justify-center items-center">
+                  <Avatar author={author} />
+                  <span className="text-sm">{author}</span>
+                </div>
+                <button onClick={() => handleCopy({ prompt, promptID })}>
+                  {promptID === copied ? (
+                    <ClipboardDocumentCheckIcon
+                      className="text-green-500"
+                      width={20}
+                    />
+                  ) : (
+                    <ClipboardDocumentIcon
+                      className="text-orange-500"
+                      width={20}
+                    />
+                  )}
+                </button>
               </div>
-              <button onClick={() => handleCopy({ prompt, promptID })}>
-                {promptID === copied ? (
-                  <ClipboardDocumentCheckIcon
-                    className="text-green-500"
-                    width={20}
-                  />
-                ) : (
-                  <ClipboardDocumentIcon
-                    className="text-orange-500"
-                    width={20}
-                  />
-                )}
-              </button>
-            </div>
-            <p>{prompt}</p>
-            <div className="flex justify-between mt-4">
-              <p
-                onClick={() => handleTagClick(tag)}
-                className="text-blue-500 cursor-pointer"
-              >
-                {"#" + tag}
-              </p>
+              <p>{prompt}</p>
+              <div className="flex justify-between mt-4">
+                <p
+                  onClick={() => handleTagClick(tag)}
+                  className="text-blue-500 cursor-pointer"
+                >
+                  {"#" + tag}
+                </p>
+              </div>
             </div>
           </div>
         );

@@ -33,7 +33,7 @@ const Nav = () => {
               onClick={() => signIn()}
             >
               <ArrowRightOnRectangleIcon width={22} />
-              Sing In
+              Sign In
             </button>
           ) : (
             <>
@@ -65,7 +65,7 @@ const Nav = () => {
                     onClick={() => signOut()}
                   >
                     <ArrowLeftOnRectangleIcon width={22} />
-                    Sing Out
+                    Sign Out
                   </button>
                 </div>
               )}

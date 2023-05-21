@@ -50,7 +50,7 @@ const Nav = () => {
                   className="rounded-full"
                   src={session.user?.image!}
                 />
-                <span className="text-sm">{session.user?.name}</span>
+                <span className="text-sm">{session.user?.username}</span>
               </button>
               {userPanelOpen && (
                 <div className="user-panel" ref={panelRef}>

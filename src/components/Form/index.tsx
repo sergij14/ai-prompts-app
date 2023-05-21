@@ -26,7 +26,8 @@ const Form = () => {
   const onSubmit = async (data: Prompt) => {
     const {
       userDatabaseID,
-      user: { name, image },
+      user: { image },
+      username,
     } = session || {};
 
     try {
@@ -38,7 +39,7 @@ const Form = () => {
         body: JSON.stringify({
           ...data,
           userDatabaseID,
-          author: name,
+          author: username,
           authorImg: image,
         }),
       });

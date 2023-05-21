@@ -28,3 +28,17 @@ export const GET = async () => {
     return new Response("Failed to fetch all prompts", { status: 500 });
   }
 };
+
+export const DELETE = async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+
+  try {
+    await connectToDB();
+    await PromptModel.findByIdAndRemove(id);
+
+    return new Response("Prompt deleted successfully", { status: 200 });
+  } catch (error) {
+    return new Response("Error deleting prompt", { status: 500 });
+  }
+};

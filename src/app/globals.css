@@ -24,7 +24,15 @@ body {
   }
 
   .nav-inner {
-    @apply flex flex-col sm:flex-row gap-4 items-center sm:justify-between;
+    @apply flex flex-col sm:flex-row gap-4 sm:justify-between;
+  }
+
+  .user-panel-container {
+    @apply relative flex flex-col items-center sm:items-end min-w-[200px];
+  }
+
+  .user-panel {
+    @apply z-50 flex flex-col items-stretch gap-3 text-center absolute w-full h-auto max-w-xs bg-gray-100 p-4 rounded-md left-2/4 transform -translate-x-2/4 top-10 sm:left-0 sm:transform-none;
   }
 
   .logo {
@@ -41,6 +49,10 @@ body {
 
   .btn-light {
     @apply text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5;
+  }
+
+  .btn-dark {
+    @apply text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2.5;
   }
 
   .input {

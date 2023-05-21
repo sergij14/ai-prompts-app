@@ -6,6 +6,7 @@ import {
   ClipboardDocumentIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import Avatar from "./Avatar";
 
 type PromptListProps = {
   data: PromptFromDB[];
@@ -42,6 +43,7 @@ const PromptCardList = ({ data, handleTagClick }: PromptListProps) => {
           <div key={_id} className="prompt-card">
             <div className="flex justify-between mb-4">
               <div className="flex gap-2 justify-center items-center">
+                <Avatar author={author} />
                 <span className="text-sm">{author}</span>
               </div>
               <button onClick={() => handleCopy({ prompt, promptID })}>

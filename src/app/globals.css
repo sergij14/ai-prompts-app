@@ -32,7 +32,16 @@ body {
   }
 
   .user-panel {
-    @apply z-50 flex flex-col items-stretch gap-3 text-center absolute w-full h-auto max-w-xs bg-gray-100 p-4 rounded-md left-2/4 transform -translate-x-2/4 top-10 sm:left-0 sm:transform-none;
+    @apply z-50 absolute w-full h-auto max-w-xs bg-gray-100 p-4 rounded-md left-2/4 transform -translate-x-2/4 top-10 sm:left-0 sm:transform-none;
+  }
+
+  .user-panel-menu {
+    @apply flex flex-col gap-3 relative;
+  }
+
+  .user-panel-menu:after {
+    @apply absolute z-20 right-6 -top-7 border-r-transparent border-t-transparent border-l-transparent border-gray-100 border-[6px] border-solid block w-0 h-0;
+    content: " ";
   }
 
   .logo {

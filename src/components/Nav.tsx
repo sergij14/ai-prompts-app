@@ -54,27 +54,29 @@ const Nav = () => {
               </button>
               {userPanelOpen && (
                 <div className="user-panel" ref={panelRef}>
-                  <Link
-                    className="btn-light flex gap-2 items-center"
-                    href={"/profile"}
-                  >
-                    <UserCircleIcon width={22} />
-                    Profile
-                  </Link>
-                  <Link
-                    className="btn-light flex gap-2 items-center"
-                    href={"/prompt-create"}
-                  >
-                    <CpuChipIcon width={22} />
-                    Create Prompt
-                  </Link>
-                  <button
-                    className="btn-dark flex gap-2 items-center"
-                    onClick={() => signOut()}
-                  >
-                    <ArrowLeftOnRectangleIcon width={22} />
-                    Sign Out
-                  </button>
+                  <div className="user-panel-menu">
+                    <Link
+                      className="btn-light flex gap-2 items-center"
+                      href={"/profile"}
+                    >
+                      <UserCircleIcon width={22} />
+                      Profile
+                    </Link>
+                    <Link
+                      className="btn-light flex gap-2 items-center"
+                      href={"/prompt-create"}
+                    >
+                      <CpuChipIcon width={22} />
+                      Create Prompt
+                    </Link>
+                    <button
+                      className="btn-dark flex gap-2 items-center"
+                      onClick={() => signOut()}
+                    >
+                      <ArrowLeftOnRectangleIcon width={22} />
+                      Sign Out
+                    </button>
+                  </div>
                 </div>
               )}
             </>

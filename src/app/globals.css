@@ -46,4 +46,12 @@ body {
   .input {
     @apply bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block font-medium  focus:outline-none text-sm px-4 py-2.5;
   }
+
+  .prompt-list {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-8 gap-4;
+  }
+
+  .prompt-card {
+    @apply border border-gray-200 rounded-md p-4 bg-gray-50 break-words;
+  }
 }

@@ -1,17 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import {
   ArrowLeftOnRectangleIcon,
   ArrowRightOnRectangleIcon,
   CpuChipIcon,
 } from "@heroicons/react/24/solid";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 
 const Nav = () => {
   const { data: session } = useSession();
   const [userPanelOpen, setUserPanelOpen] = useState(false);
+  const panelRef = useRef(null);
+  const panelBtnRef = useRef(null);
+
+  useOnClickOutside(panelRef, panelBtnRef, () => setUserPanelOpen(false));
 
   return (
     <nav className="nav">
@@ -33,6 +38,7 @@ const Nav = () => {
           ) : (
             <>
               <button
+                ref={panelBtnRef}
                 onClick={() => setUserPanelOpen(!userPanelOpen)}
                 className="text-black flex gap-2 items-center opacity-80 hover:opacity-100"
               >
@@ -46,10 +52,7 @@ const Nav = () => {
                 </span>
               </button>
               {userPanelOpen && (
-                <div className="user-panel">
-                  {/* <Link className="btn-light" href={"/profile"}>
-                    Profile
-                  </Link> */}
+                <div className="user-panel" ref={panelRef}>
                   <Link
                     className="btn-light flex gap-2 items-center"
                     href={"/prompt-create"}

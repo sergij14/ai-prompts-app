@@ -1,9 +1,8 @@
 import PromptModel from "@/models/Prompt";
-import { Prompt, PromptFromDB } from "@/types";
 import { connectToDB } from "@/utils/connectToDB";
 
 export async function POST(req: Request) {
-  const promptData: Prompt = await req.json();
+  const promptData = await req.json();
 
   try {
     await connectToDB();

@@ -1,5 +1,5 @@
 import PromptModel from "@/models/Prompt";
-import { Prompt } from "@/types";
+import { Prompt, PromptFromDB } from "@/types";
 import { connectToDB } from "@/utils/connectToDB";
 
 export async function POST(req: Request) {
@@ -18,10 +18,14 @@ export async function POST(req: Request) {
   }
 }
 
-export const GET = async () => {
+export const GET = async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+  const userID = searchParams.get("user-id");
+  const query = userID ? { userDatabaseID: userID } : {};
+
   try {
     await connectToDB();
-    const prompts = await PromptModel.find();
+    const prompts = await PromptModel.find({ ...query });
 
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {

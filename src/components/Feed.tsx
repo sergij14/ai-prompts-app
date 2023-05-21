@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PromptFromDB } from "@/types";
 import PromptCardList from "./PromptCardList";
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import Loader from "./Loader";
 
 type SearchProps = {
@@ -34,6 +34,7 @@ const Feed = () => {
   } = useSWR<PromptFromDB[]>("/api/prompts", fetchPrompts, {
     revalidateOnFocus: false,
   });
+  const { mutate } = useSWRConfig();
 
   const filterPrompts = (searchTerm: string) => {
     const regex = new RegExp(searchTerm, "i");
@@ -59,6 +60,7 @@ const Feed = () => {
       await fetch(`/api/prompts?id=${_id}`, {
         method: "DELETE",
       });
+      mutate("/api/prompts", true);
     } catch (err) {
       console.log(err);
     }
@@ -101,7 +103,7 @@ const Feed = () => {
           </button>
         )}
       </div>
-      {prompts && (
+      {prompts && prompts.length > 0 && (
         <PromptCardList
           handleDelete={handleDelete}
           handleTagClick={handleTagClick}

@@ -33,7 +33,7 @@ const PromptCardList = ({ data }: PromptListProps) => {
   };
 
   return (
-    <div className="prompt-list py-8">
+    <div className="prompt-list">
       {data.map(({ prompt, _id, tag, author }) => {
         const promptID = _id?.toString();
 

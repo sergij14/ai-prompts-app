@@ -54,4 +54,8 @@ body {
   .prompt-card {
     @apply border border-gray-200 rounded-md p-4 bg-gray-50 break-words;
   }
+
+  .search-input {
+    @apply block w-full p-4 pl-12 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 focus:outline-none;
+  }
 }

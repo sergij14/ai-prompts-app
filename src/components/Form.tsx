@@ -39,7 +39,7 @@ const Form = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 items-center"
+      className="flex flex-col gap-4 items-center my-8"
     >
       <div className="w-full max-w-md">
         <label htmlFor="tag" className="block mb-2 text-sm font-medium">

@@ -38,7 +38,7 @@ const handler = NextAuth({
         if (!userExists) {
           await User.create({
             email: profile?.email,
-            name: profile?.name,
+            name: profile?.name || "Anonymus-" + userID,
             userID,
             image: user.image,
           });

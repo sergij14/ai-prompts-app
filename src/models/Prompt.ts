@@ -9,6 +9,10 @@ const PromptSchema = new Schema({
     type: String,
     required: [true, "Tag is required."],
   },
+  author: {
+    type: String,
+    required: [true, "Author is required."],
+  },
 });
 
 const PromptModel = models.Prompt || model("Prompt", PromptSchema);

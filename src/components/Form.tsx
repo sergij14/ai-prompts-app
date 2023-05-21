@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Prompt, PromptFromDB, promptSchema } from "@/types";
-import { useEffect, useState } from "react";
 
 const Form = () => {
   const {
@@ -48,6 +48,17 @@ const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 items-center"
       >
+        <div className="w-full max-w-md">
+          <label htmlFor="tag" className="block mb-2 text-sm font-medium">
+            Author:
+          </label>
+          <input
+            className={`input w-full ${errors.tag && "border-red-500"}`}
+            {...register("author")}
+          />
+          <p className="text-red-500">{errors.tag?.message}</p>
+        </div>
+
         <div className="w-full max-w-md">
           <label htmlFor="prompt" className="block mb-2 text-sm font-medium">
             Prompt:

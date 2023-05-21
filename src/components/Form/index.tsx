@@ -6,6 +6,7 @@ import { Prompt } from "@/types";
 import { useRouter } from "next/navigation";
 import { PlusIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
 import { promptSchema } from "./schemas";
+import { useSession } from "next-auth/react";
 
 const Form = () => {
   const {
@@ -18,17 +19,28 @@ const Form = () => {
   });
 
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleReset = () => reset({ tag: "", author: "", prompt: "" });
 
   const onSubmit = async (data: Prompt) => {
+    const {
+      userDatabaseID,
+      user: { name, image },
+    } = session || {};
+
     try {
       await fetch("/api/prompts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          userDatabaseID,
+          author: name,
+          authorImg: image,
+        }),
       });
 
       router.push("/");
@@ -42,19 +54,6 @@ const Form = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 items-center my-8"
     >
-      <div className="w-full max-w-md">
-        <label htmlFor="author" className="block mb-2 text-sm font-medium">
-          Author:
-        </label>
-        <input
-          className={`input w-full ${
-            errors.author && "border-red-500 focus:border-red-500"
-          }`}
-          {...register("author")}
-        />
-        <p className="field-error">{errors.author?.message}</p>
-      </div>
-
       <div className="w-full max-w-md">
         <label htmlFor="prompt" className="block mb-2 text-sm font-medium">
           Prompt:

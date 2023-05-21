@@ -1,47 +1,54 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PromptFromDB } from "@/types";
 import PromptCardList from "./PromptCardList";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import useSWR from "swr";
+import Loader from "./Loader";
 
 type SearchProps = {
   term: string;
-  result: PromptFromDB[];
   timeout: ReturnType<typeof setTimeout> | null;
+  result: PromptFromDB[];
 };
 
 const Feed = () => {
-  const [prompts, setPrompts] = useState<PromptFromDB[]>([]);
   const [{ term, result, timeout }, setSearch] = useState<SearchProps>({
     term: "",
     result: [],
     timeout: null,
   });
 
-  const fetchPrompts = async () => {
-    const res = await fetch("/api/prompts");
+  const fetchPrompts = async (url: string) => {
+    const res = await fetch(url);
     const data: PromptFromDB[] = await res.json();
 
-    setPrompts(data);
+    return data;
   };
 
-  useEffect(() => {
-    fetchPrompts();
-  }, []);
+  const {
+    data: prompts,
+    error,
+    isLoading,
+  } = useSWR<PromptFromDB[]>("/api/prompts", fetchPrompts, {
+    revalidateOnFocus: false,
+  });
 
   const filterPrompts = (searchTerm: string) => {
     const regex = new RegExp(searchTerm, "i");
 
-    setSearch((prev) => ({
-      ...prev,
-      result: prompts?.filter(
-        (item) =>
-          regex.test(item.author) ||
-          regex.test(item.tag) ||
-          regex.test(item.prompt)
-      ),
-    }));
+    if (prompts) {
+      setSearch((prev) => ({
+        ...prev,
+        result: prompts.filter(
+          (item) =>
+            regex.test(item.author) ||
+            regex.test(item.tag) ||
+            regex.test(item.prompt)
+        ),
+      }));
+    }
   };
 
   const handleTagClick = (tag: string) => {
@@ -64,7 +71,7 @@ const Feed = () => {
 
   return (
     <div className="my-8">
-      <div className="relative max-w-md mx-auto">
+      <div className="relative my-8 max-w-md mx-auto">
         <div className="absolute top-4 left-4 pointer-events-none">
           <MagnifyingGlassIcon width={20} />
         </div>
@@ -76,7 +83,13 @@ const Feed = () => {
           placeholder="Search prompts..."
         />
       </div>
-      <PromptCardList handleTagClick={handleTagClick} data={term ? result : prompts} />
+      {prompts && (
+        <PromptCardList
+          handleTagClick={handleTagClick}
+          data={term ? result : prompts}
+        />
+      )}
+      {isLoading && <Loader message="Fetching prompts..." />}
     </div>
   );
 };

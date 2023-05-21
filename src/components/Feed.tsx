@@ -13,7 +13,7 @@ type SearchProps = {
   result: PromptFromDB[];
 };
 
-const Feed = () => {
+const Feed = ({fetchUrl}: {fetchUrl: string}) => {
   const [{ term, result, timeout }, setSearch] = useState<SearchProps>({
     term: "",
     result: [],
@@ -31,7 +31,7 @@ const Feed = () => {
     data: prompts,
     error,
     isLoading,
-  } = useSWR<PromptFromDB[]>("/api/prompts", fetchPrompts, {
+  } = useSWR<PromptFromDB[]>(fetchUrl, fetchPrompts, {
     revalidateOnFocus: false,
   });
   const { mutate } = useSWRConfig();

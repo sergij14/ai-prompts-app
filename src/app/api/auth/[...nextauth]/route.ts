@@ -1,4 +1,5 @@
 import { User } from "@/models/User";
+import { UserFromDB } from "@/types";
 import { connectToDB } from "@/utils/connectToDB";
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
@@ -20,8 +21,12 @@ const handler = NextAuth({
 
         return {
           ...session,
-          userID,
-          userDatabaseID: sessionUser._id.toString(),
+          user: {
+            ...session.user,
+            userDatabaseID: sessionUser._id.toString(),
+            username: sessionUser.username,
+            userID,
+          },
         };
       } catch (err) {
         console.log(err);
@@ -32,15 +37,21 @@ const handler = NextAuth({
       try {
         await connectToDB();
 
-        const userID = user.id;
+        const { id: userID, image } = user;
+
+        const { email, login } = profile as {
+          email: UserFromDB["email"];
+          login: UserFromDB["username"];
+        };
+
         const userExists = await User.findOne({ userID });
 
         if (!userExists) {
           await User.create({
-            email: profile?.email,
-            name: profile?.name || "Anonymus-" + userID,
+            email: email,
+            username: login,
             userID,
-            image: user.image,
+            image,
           });
         }
 

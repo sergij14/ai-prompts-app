@@ -9,3 +9,11 @@ export type PromptFromDB = Prompt & {
   _id: string;
   userDatabaseID: string;
 };
+
+export type UserFromDB = {
+  email: string | null;
+  username: string;
+  image: string;
+  userID: string;
+  _id: string;
+};

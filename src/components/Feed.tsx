@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { PromptFromDB } from "@/types";
 import PromptCardList from "./PromptCardList";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import useSWR from "swr";
 import Loader from "./Loader";
 
@@ -54,6 +54,8 @@ const Feed = () => {
     setSearch((prev) => ({ ...prev, term: tag }));
   };
 
+  const handleSearchClear = () => setSearch((prev) => ({ ...prev, term: "" }));
+
   const handleSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (timeout) clearTimeout(timeout);
 
@@ -70,8 +72,8 @@ const Feed = () => {
   return (
     <div className="my-8">
       <div className="relative my-8 max-w-md mx-auto">
-        <div className="absolute top-4 left-4 pointer-events-none">
-          <MagnifyingGlassIcon width={20} />
+        <div className="absolute top-2/4 tranform -translate-y-2/4 left-4 pointer-events-none">
+          <MagnifyingGlassIcon width={16} />
         </div>
         <input
           onChange={handleSearch}
@@ -80,6 +82,14 @@ const Feed = () => {
           className="search-input"
           placeholder="Search prompts..."
         />
+        {term && (
+          <button
+            onClick={handleSearchClear}
+            className="absolute top-2/4 tranform -translate-y-2/4 right-4 z-10 cursor-pointer text-gray-400 opacity-70 hover:opacity-100"
+          >
+            <XCircleIcon width={22} />
+          </button>
+        )}
       </div>
       {prompts && (
         <PromptCardList

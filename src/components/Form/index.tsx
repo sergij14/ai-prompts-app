@@ -87,11 +87,11 @@ const Form = () => {
           type="button"
           onClick={handleReset}
         >
-          <ArrowPathIcon width={16} />
+          <ArrowPathIcon width={22} />
           Reset
         </button>
         <button className="btn-default flex gap-2 items-center" type="submit">
-          <PlusIcon width={16} />
+          <PlusIcon width={22} />
           Create
         </button>
       </div>

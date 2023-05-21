@@ -63,12 +63,12 @@ const PromptCardList = ({
                   {promptID === copied ? (
                     <ClipboardDocumentCheckIcon
                       className="text-green-500"
-                      width={20}
+                      width={22}
                     />
                   ) : (
                     <ClipboardDocumentIcon
                       className="text-orange-500"
-                      width={20}
+                      width={22}
                     />
                   )}
                 </button>
@@ -86,7 +86,7 @@ const PromptCardList = ({
                     className="text-red-500 opacity-70 hover:opacity-100"
                     onClick={() => handleDelete(promptID)}
                   >
-                    <XCircleIcon width={24} />
+                    <XCircleIcon width={22} />
                   </button>
                 )}
               </div>

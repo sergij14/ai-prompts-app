@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import {
+  ArrowLeftOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
+  CpuChipIcon,
+} from "@heroicons/react/24/solid";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -18,31 +23,45 @@ const Nav = () => {
         </h1>
         <div className="user-panel-container">
           {!session ? (
-            <button className="btn-default" onClick={() => signIn()}>
+            <button
+              className="btn-default flex gap-2 items-center"
+              onClick={() => signIn()}
+            >
+              <ArrowRightOnRectangleIcon width={22} />
               Sing In
             </button>
           ) : (
             <>
               <button
                 onClick={() => setUserPanelOpen(!userPanelOpen)}
-                className="text-black flex gap-2 items-center"
+                className="text-black flex gap-2 items-center opacity-80 hover:opacity-100"
               >
                 <img
                   width={28}
                   className="rounded-full"
                   src={session.user?.image!}
                 />
-                <span className="text-sm">{session.user?.name}</span>
+                <span className={`text-sm ${userPanelOpen && "font-semibold"}`}>
+                  {session.user?.name}
+                </span>
               </button>
               {userPanelOpen && (
                 <div className="user-panel">
                   {/* <Link className="btn-light" href={"/profile"}>
                     Profile
                   </Link> */}
-                  <Link className="btn-light" href={"/prompt-create"}>
+                  <Link
+                    className="btn-light flex gap-2 items-center"
+                    href={"/prompt-create"}
+                  >
+                    <CpuChipIcon width={22} />
                     Create Prompt
                   </Link>
-                  <button className="btn-dark" onClick={() => signOut()}>
+                  <button
+                    className="btn-dark flex gap-2 items-center"
+                    onClick={() => signOut()}
+                  >
+                    <ArrowLeftOnRectangleIcon width={22} />
                     Sing Out
                   </button>
                 </div>

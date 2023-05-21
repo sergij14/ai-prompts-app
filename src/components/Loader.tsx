@@ -7,7 +7,7 @@ const Loader = ({ message }: { message: string }) => {
       className="flex flex-col text-center items-center gap-2 justify-center"
     >
       <div className="animate-spin w-6">
-        <ArrowPathIcon width={24} />
+        <ArrowPathIcon width={22} />
       </div>
       <span className="text-sm">{message}</span>
     </div>

@@ -85,7 +85,7 @@ const Feed = () => {
     <div className="my-8">
       <div className="relative my-8 max-w-md mx-auto">
         <div className="absolute top-2/4 tranform -translate-y-2/4 left-4 pointer-events-none">
-          <MagnifyingGlassIcon width={16} />
+          <MagnifyingGlassIcon width={22} />
         </div>
         <input
           onChange={handleSearch}

@@ -20,7 +20,7 @@ body {
 
 @layer components {
   .nav {
-    @apply py-8 bg-white border-b flex items-center border-gray-200;
+    @apply py-8 bg-white border-b flex items-center border-gray-300;
   }
 
   .nav-inner {

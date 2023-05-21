@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 import AuthProvider from "@/components/AuthProvider";
 import { getActiveSession } from "@/utils/getSession";
+import Hero from "@/components/Hero";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <main className="min-h-screen">
             <Nav />
+            <Hero />
             <div className="container">{children}</div>
           </main>
         </AuthProvider>

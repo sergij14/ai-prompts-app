@@ -7,6 +7,7 @@ import {
   ArrowLeftOnRectangleIcon,
   ArrowRightOnRectangleIcon,
   CpuChipIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 
@@ -40,19 +41,26 @@ const Nav = () => {
               <button
                 ref={panelBtnRef}
                 onClick={() => setUserPanelOpen(!userPanelOpen)}
-                className="text-black flex gap-2 items-center opacity-80 hover:opacity-100"
+                className={`text-black flex gap-2 items-center opacity-80 hover:opacity-100 ${
+                  userPanelOpen && "opacity-100"
+                }`}
               >
                 <img
                   width={28}
                   className="rounded-full"
                   src={session.user?.image!}
                 />
-                <span className={`text-sm ${userPanelOpen && "font-semibold"}`}>
-                  {session.user?.name}
-                </span>
+                <span className="text-sm">{session.user?.name}</span>
               </button>
               {userPanelOpen && (
                 <div className="user-panel" ref={panelRef}>
+                  <Link
+                    className="btn-light flex gap-2 items-center"
+                    href={"/profile"}
+                  >
+                    <UserCircleIcon width={22} />
+                    Profile
+                  </Link>
                   <Link
                     className="btn-light flex gap-2 items-center"
                     href={"/prompt-create"}

@@ -21,7 +21,7 @@ const Form = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const handleReset = () => reset({ tag: "", author: "", prompt: "" });
+  const handleReset = () => reset({ tag: "", prompt: "" });
 
   const onSubmit = async (data: Prompt) => {
     const {

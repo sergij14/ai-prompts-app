@@ -54,6 +54,16 @@ const Feed = () => {
     setSearch((prev) => ({ ...prev, term: tag }));
   };
 
+  const handleDelete = async (_id?: string) => {
+    try {
+      await fetch(`/api/prompts?id=${_id}`, {
+        method: "DELETE",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleSearchClear = () => setSearch((prev) => ({ ...prev, term: "" }));
 
   const handleSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +103,7 @@ const Feed = () => {
       </div>
       {prompts && (
         <PromptCardList
+          handleDelete={handleDelete}
           handleTagClick={handleTagClick}
           data={term ? result : prompts}
         />

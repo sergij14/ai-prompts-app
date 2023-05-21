@@ -36,9 +36,9 @@ const Nav = () => {
               </button>
               {userPanelOpen && (
                 <div className="user-panel">
-                  <Link className="btn-light" href={"/profile"}>
+                  {/* <Link className="btn-light" href={"/profile"}>
                     Profile
-                  </Link>
+                  </Link> */}
                   <Link className="btn-light" href={"/prompt-create"}>
                     Create Prompt
                   </Link>

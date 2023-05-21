@@ -9,9 +9,10 @@ import { useState } from "react";
 
 type PromptListProps = {
   data: PromptFromDB[];
+  handleTagClick: (tag: string) => void;
 };
 
-const PromptCardList = ({ data }: PromptListProps) => {
+const PromptCardList = ({ data, handleTagClick }: PromptListProps) => {
   const [copied, setCopied] = useState<string>();
 
   const handleCopy = ({
@@ -59,7 +60,12 @@ const PromptCardList = ({ data }: PromptListProps) => {
             </div>
             <p>{prompt}</p>
             <div className="flex justify-between mt-4">
-              <p className="text-blue-500 cursor-pointer">{"#" + tag}</p>
+              <p
+                onClick={() => handleTagClick(tag)}
+                className="text-blue-500 cursor-pointer"
+              >
+                {"#" + tag}
+              </p>
             </div>
           </div>
         );

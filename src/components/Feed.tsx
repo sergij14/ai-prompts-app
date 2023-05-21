@@ -44,6 +44,11 @@ const Feed = () => {
     }));
   };
 
+  const handleTagClick = (tag: string) => {
+    filterPrompts(tag);
+    setSearch((prev) => ({ ...prev, term: tag }));
+  };
+
   const handleSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (timeout) clearTimeout(timeout);
 
@@ -58,7 +63,7 @@ const Feed = () => {
   };
 
   return (
-    <div className="my-8 ">
+    <div className="my-8">
       <div className="relative max-w-md mx-auto">
         <div className="absolute top-4 left-4 pointer-events-none">
           <MagnifyingGlassIcon width={20} />
@@ -71,7 +76,7 @@ const Feed = () => {
           placeholder="Search prompts..."
         />
       </div>
-      <PromptCardList data={term ? result : prompts} />
+      <PromptCardList handleTagClick={handleTagClick} data={term ? result : prompts} />
     </div>
   );
 };

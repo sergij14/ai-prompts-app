@@ -1,3 +1,4 @@
+import Nav from "@/components/Nav";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          <Nav />
+          <div className="container">{children}</div>
+        </main>
       </body>
     </html>
   );

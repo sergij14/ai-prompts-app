@@ -2,9 +2,10 @@
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Prompt, promptSchema } from "@/types";
+import { Prompt } from "@/types";
 import { useRouter } from "next/navigation";
 import { PlusIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
+import { promptSchema } from "./schemas";
 
 const Form = () => {
   const {
@@ -42,14 +43,16 @@ const Form = () => {
       className="flex flex-col gap-4 items-center my-8"
     >
       <div className="w-full max-w-md">
-        <label htmlFor="tag" className="block mb-2 text-sm font-medium">
+        <label htmlFor="author" className="block mb-2 text-sm font-medium">
           Author:
         </label>
         <input
-          className={`input w-full ${errors.tag && "border-red-500"}`}
+          className={`input w-full ${
+            errors.author && "border-red-500 focus:border-red-500"
+          }`}
           {...register("author")}
         />
-        <p className="text-red-500">{errors.tag?.message}</p>
+        <p className="field-error">{errors.author?.message}</p>
       </div>
 
       <div className="w-full max-w-md">
@@ -59,11 +62,11 @@ const Form = () => {
 
         <textarea
           className={`input w-full min-h-[120px] max-h-[200px]  ${
-            errors.tag && "border-red-500"
+            errors.prompt && "border-red-500 focus:border-red-500"
           }`}
           {...register("prompt")}
         ></textarea>
-        <p className="text-red-500">{errors.prompt?.message}</p>
+        <p className="field-error">{errors.prompt?.message}</p>
       </div>
 
       <div className="w-full max-w-md">
@@ -71,10 +74,12 @@ const Form = () => {
           Tag:
         </label>
         <input
-          className={`input w-full ${errors.tag && "border-red-500"}`}
+          className={`input w-full ${
+            errors.tag && "border-red-500 focus:border-red-500"
+          }`}
           {...register("tag")}
         />
-        <p className="text-red-500">{errors.tag?.message}</p>
+        <p className="field-error">{errors.tag?.message}</p>
       </div>
 
       <div className="flex gap-2 items-start">

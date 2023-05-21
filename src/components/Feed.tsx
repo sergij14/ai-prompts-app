@@ -36,13 +36,14 @@ const Feed = () => {
   });
 
   const filterPrompts = (searchTerm: string) => {
-    const { test } = new RegExp(searchTerm, "i");
+    const regex = new RegExp(searchTerm, "i");
 
     if (prompts) {
       setSearch((prev) => ({
         ...prev,
         result: prompts.filter(
-          ({ author, tag, prompt }) => test(author) || test(tag) || test(prompt)
+          ({ author, tag, prompt }) =>
+            regex.test(author) || regex.test(tag) || regex.test(prompt)
         ),
       }));
     }

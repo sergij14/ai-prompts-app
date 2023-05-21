@@ -41,8 +41,8 @@ const Nav = () => {
               <button
                 ref={panelBtnRef}
                 onClick={() => setUserPanelOpen(!userPanelOpen)}
-                className={`text-black flex gap-2 items-center opacity-80 hover:opacity-100 ${
-                  userPanelOpen && "opacity-100"
+                className={`text-black flex gap-2 items-center hover:opacity-100 ${
+                  userPanelOpen ? "opacity-100" : "opacity-80"
                 }`}
               >
                 <img

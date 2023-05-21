@@ -18,3 +18,14 @@ export async function POST(req: Request) {
     return new Response("Failed to create a new prompt", { status: 500 });
   }
 }
+
+export const GET = async () => {
+  try {
+    await connectToDB();
+    const prompts = await PromptModel.find();
+
+    return new Response(JSON.stringify(prompts), { status: 200 });
+  } catch (error) {
+    return new Response("Failed to fetch all prompts", { status: 500 });
+  }
+};

@@ -13,8 +13,5 @@ export type Prompt = {
 };
 
 export type PromptFromDB = Prompt & {
-  creator: string;
-  creatorImg: string;
-  userDatabaseID: string;
   _id: string;
 };

@@ -1,0 +1,20 @@
+import PromptModel from "@/models/Prompt";
+import { Prompt } from "@/types";
+import { connectToDB } from "@/utils/connectToDB";
+
+export async function POST(req: Request) {
+  const { tag, prompt }: Prompt = await req.json();
+
+  try {
+    await connectToDB();
+    const newPrompt = new PromptModel({
+      prompt,
+      tag,
+    });
+
+    await newPrompt.save();
+    return new Response(JSON.stringify(newPrompt), { status: 201 });
+  } catch (error) {
+    return new Response("Failed to create a new prompt", { status: 500 });
+  }
+}

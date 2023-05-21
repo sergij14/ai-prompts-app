@@ -24,11 +24,7 @@ const Form = () => {
   const handleReset = () => reset({ tag: "", prompt: "" });
 
   const onSubmit = async (data: Prompt) => {
-    const {
-      userDatabaseID,
-      user: { image },
-      username,
-    } = session || {};
+    const { user } = session || {};
 
     try {
       await fetch("/api/prompts", {
@@ -38,9 +34,9 @@ const Form = () => {
         },
         body: JSON.stringify({
           ...data,
-          userDatabaseID,
-          author: username,
-          authorImg: image,
+          userDatabaseID: user?.userDatabaseID,
+          author: user?.username,
+          authorImg: user?.image,
         }),
       });
 

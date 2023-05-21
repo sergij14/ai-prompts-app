@@ -9,9 +9,9 @@ const MyPropfile = () => {
 
   return (
     <div>
-      <Profile name={session?.user.name} desc="Welcome to your profile" />
+      <Profile name={session?.user.username} desc="Welcome to your profile" />
       <Feed
-        fetchUrl={`/api/prompts?user-id=${session?.userDatabaseID}`}
+        fetchUrl={`/api/prompts?user-id=${session?.user.userDatabaseID}`}
       />
     </div>
   );

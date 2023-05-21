@@ -4,9 +4,12 @@ import NextAuth, { Session } from "next-auth";
 declare module "next-auth" {
   interface Session {
     expires: string;
-    user: Session["user"];
-    userDatabaseID: string;
-    username: UserFromDB['username'],
-    userID: UserFromDB['userID'],
+    user: {
+      image: UserFromDB['image'],
+      name: string,
+      userDatabaseID: UserFromDB['_id'],
+      username: UserFromDB['username'],
+      userID: UserFromDB['username'],
+    }
   }
 }

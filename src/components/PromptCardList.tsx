@@ -46,7 +46,7 @@ const PromptCardList = ({
     <div className="prompt-list">
       {data.map(({ prompt, _id, tag, author, authorImg, userDatabaseID }) => {
         const promptID = _id?.toString();
-        const isCurrentUser = session?.userDatabaseID === userDatabaseID;
+        const isCurrentUser = session?.user.userDatabaseID === userDatabaseID;
 
         return (
           <div key={_id} className="relative">

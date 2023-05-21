@@ -47,7 +47,7 @@ const PromptCardList = ({ data, handleTagClick }: PromptListProps) => {
                   <Avatar author={author} />
                   <span className="text-sm">{author}</span>
                 </div>
-                <button onClick={() => handleCopy({ prompt, promptID })}>
+                <button className="opacity-70 hover:opacity-100" onClick={() => handleCopy({ prompt, promptID })}>
                   {promptID === copied ? (
                     <ClipboardDocumentCheckIcon
                       className="text-green-500"

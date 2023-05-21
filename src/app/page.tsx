@@ -1,8 +1,10 @@
 import Form from "@/components/Form";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
     <div>
+      <Hero />
       <Form />
     </div>
   );

@@ -71,7 +71,7 @@ const Feed = ({ fetchUrl, isEditable = false }: FeedProps) => {
       await fetch(`/api/prompts?id=${_id}`, {
         method: "DELETE",
       });
-      mutate("/api/prompts", true);
+      mutate(fetchUrl, true);
     } catch (err) {
       console.log(err);
     }

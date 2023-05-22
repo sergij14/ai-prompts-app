@@ -4,6 +4,7 @@ import { PromptFromDB } from "@/types";
 import {
   ClipboardDocumentCheckIcon,
   ClipboardDocumentIcon,
+  PencilSquareIcon,
   XCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
@@ -90,11 +91,11 @@ const PromptCardList = ({
                     Delete
                   </button>
                   <button
-                    className="text-red-500 opacity-70 hover:opacity-100 flex items-center gap-1"
+                    className="text-blue-500 opacity-70 hover:opacity-100 flex items-center gap-1"
                     onClick={() => handleEdit(promptID)}
                   >
-                    {/* <XCircleIcon width={22} /> */}
                     Edit
+                    <PencilSquareIcon width={22} />
                   </button>
                 </div>
               )}

@@ -7,6 +7,7 @@ import {
   PencilSquareIcon,
   XCircleIcon,
 } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import { useState } from "react";
 
 type PromptListProps = {
@@ -54,7 +55,13 @@ const PromptCardList = ({
             <div key={_id} className="prompt-card">
               <div className="flex justify-between mb-4">
                 <div className="flex gap-2 justify-center items-center">
-                  <img className="rounded-full w-6" src={authorImg} />
+                  <Image
+                    alt={author}
+                    width={24}
+                    height={24}
+                    className="rounded-full"
+                    src={authorImg}
+                  />
                   <span className="text-sm">{author}</span>
                 </div>
                 <button

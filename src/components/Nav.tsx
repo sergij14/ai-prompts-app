@@ -10,6 +10,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
+import Image from "next/image";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -45,9 +46,11 @@ const Nav = () => {
                   userPanelOpen ? "opacity-100" : "opacity-80"
                 }`}
               >
-                <img
+                <Image
                   width={28}
+                  height={28}
                   className="rounded-full"
+                  alt={session.user?.username}
                   src={session.user?.image!}
                 />
                 <span className="text-sm">{session.user?.username}</span>

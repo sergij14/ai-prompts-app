@@ -12,6 +12,7 @@ type PromptListProps = {
   data: PromptFromDB[];
   handleTagClick: (tag: string) => void;
   handleDelete: (id?: string) => void;
+  handleEdit: (id?: string) => void;
   isEditable?: boolean;
 };
 
@@ -19,6 +20,7 @@ const PromptCardList = ({
   data,
   handleTagClick,
   handleDelete,
+  handleEdit,
   isEditable,
 }: PromptListProps) => {
   const [copied, setCopied] = useState<string>();
@@ -78,8 +80,8 @@ const PromptCardList = ({
               >
                 {"#" + tag}
               </p>
-              <div className="flex justify-between mt-2">
-                {isEditable && (
+              {isEditable && (
+                <div className="flex justify-between mt-2">
                   <button
                     className="text-red-500 opacity-70 hover:opacity-100 flex items-center gap-1"
                     onClick={() => handleDelete(promptID)}
@@ -87,8 +89,15 @@ const PromptCardList = ({
                     <XCircleIcon width={22} />
                     Delete
                   </button>
-                )}
-              </div>
+                  <button
+                    className="text-red-500 opacity-70 hover:opacity-100 flex items-center gap-1"
+                    onClick={() => handleEdit(promptID)}
+                  >
+                    {/* <XCircleIcon width={22} /> */}
+                    Edit
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         );

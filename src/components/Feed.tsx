@@ -6,6 +6,7 @@ import PromptCardList from "./PromptCardList";
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import useSWR, { useSWRConfig } from "swr";
 import Loader from "./Loader";
+import { useRouter } from "next/navigation";
 
 type SearchProps = {
   term: string;
@@ -40,6 +41,7 @@ const Feed = ({ fetchUrl, isEditable = false }: FeedProps) => {
     revalidateOnFocus: false,
   });
   const { mutate } = useSWRConfig();
+  const router = useRouter();
 
   const filterPrompts = (searchTerm: string) => {
     const regex = new RegExp(searchTerm, "i");
@@ -58,6 +60,10 @@ const Feed = ({ fetchUrl, isEditable = false }: FeedProps) => {
   const handleTagClick = (tag: string) => {
     filterPrompts(tag);
     setSearch((prev) => ({ ...prev, term: tag }));
+  };
+
+  const handleEdit = (_id?: string) => {
+    router.push(`prompt-edit?id=${_id}`);
   };
 
   const handleDelete = async (_id?: string) => {
@@ -113,6 +119,7 @@ const Feed = ({ fetchUrl, isEditable = false }: FeedProps) => {
           isEditable={isEditable}
           handleDelete={handleDelete}
           handleTagClick={handleTagClick}
+          handleEdit={handleEdit}
           data={term ? result : prompts}
         />
       )}

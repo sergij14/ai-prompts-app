@@ -45,3 +45,27 @@ export const DELETE = async (req: Request) => {
     return new Response("Error deleting prompt", { status: 500 });
   }
 };
+
+export const PATCH = async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+  const { tag, prompt } = await req.json();
+
+  try {
+    await connectToDB();
+    const existingPrompt = await PromptModel.findById(id);
+
+    if (!existingPrompt) {
+      return new Response("Prompt not found", { status: 404 });
+    }
+
+    existingPrompt.tag = tag;
+    existingPrompt.prompt = prompt;
+    
+    await existingPrompt.save();
+
+    return new Response("Prompt deleted successfully", { status: 200 });
+  } catch (error) {
+    return new Response("Error deleting prompt", { status: 500 });
+  }
+};

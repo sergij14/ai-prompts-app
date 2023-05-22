@@ -11,6 +11,7 @@ const MyPropfile = () => {
     <div>
       <Profile name={session?.user.username} desc="Welcome to your profile" />
       <Feed
+        isEditable
         fetchUrl={`/api/prompts?user-id=${session?.user.userDatabaseID}`}
       />
     </div>

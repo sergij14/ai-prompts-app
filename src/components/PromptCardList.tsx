@@ -6,23 +6,22 @@ import {
   ClipboardDocumentIcon,
   XCircleIcon,
 } from "@heroicons/react/24/solid";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 type PromptListProps = {
   data: PromptFromDB[];
   handleTagClick: (tag: string) => void;
   handleDelete: (id?: string) => void;
+  isEditable?: boolean;
 };
 
 const PromptCardList = ({
   data,
   handleTagClick,
   handleDelete,
+  isEditable,
 }: PromptListProps) => {
   const [copied, setCopied] = useState<string>();
-
-  const { data: session } = useSession();
 
   const handleCopy = ({
     prompt,
@@ -46,7 +45,6 @@ const PromptCardList = ({
     <div className="prompt-list">
       {data.map(({ prompt, _id, tag, author, authorImg, userDatabaseID }) => {
         const promptID = _id?.toString();
-        const isCurrentUser = session?.user.userDatabaseID === userDatabaseID;
 
         return (
           <div key={_id} className="relative">
@@ -74,19 +72,20 @@ const PromptCardList = ({
                 </button>
               </div>
               <p>{prompt}</p>
-              <div className="flex justify-between mt-4">
-                <p
-                  className="text-blue-500 cursor-pointer"
-                  onClick={() => handleTagClick(tag)}
-                >
-                  {"#" + tag}
-                </p>
-                {isCurrentUser && (
+              <p
+                className="text-blue-500 cursor-pointer mt-1"
+                onClick={() => handleTagClick(tag)}
+              >
+                {"#" + tag}
+              </p>
+              <div className="flex justify-between mt-2">
+                {isEditable && (
                   <button
-                    className="text-red-500 opacity-70 hover:opacity-100"
+                    className="text-red-500 opacity-70 hover:opacity-100 flex items-center gap-1"
                     onClick={() => handleDelete(promptID)}
                   >
                     <XCircleIcon width={22} />
+                    Delete
                   </button>
                 )}
               </div>

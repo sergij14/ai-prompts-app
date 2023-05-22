@@ -13,7 +13,12 @@ type SearchProps = {
   result: PromptFromDB[];
 };
 
-const Feed = ({fetchUrl}: {fetchUrl: string}) => {
+type FeedProps = {
+  fetchUrl: string;
+  isEditable?: boolean;
+};
+
+const Feed = ({ fetchUrl, isEditable = false }: FeedProps) => {
   const [{ term, result, timeout }, setSearch] = useState<SearchProps>({
     term: "",
     result: [],
@@ -105,6 +110,7 @@ const Feed = ({fetchUrl}: {fetchUrl: string}) => {
       </div>
       {prompts && prompts.length > 0 && (
         <PromptCardList
+          isEditable={isEditable}
           handleDelete={handleDelete}
           handleTagClick={handleTagClick}
           data={term ? result : prompts}

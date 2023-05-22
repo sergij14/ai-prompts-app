@@ -4,7 +4,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Prompt, PromptFromDB } from "@/types";
 import { useRouter } from "next/navigation";
-import { PlusIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
+import {
+  PlusIcon,
+  ArrowPathIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/solid";
 import { promptSchema } from "./schemas";
 import { useSession } from "next-auth/react";
 
@@ -28,9 +32,10 @@ const Form = ({ editPromptData }: { editPromptData?: PromptFromDB }) => {
 
   const handleReset = () => reset({ tag: "", prompt: "" });
 
-  const { method, reqBody, submitText } = {
+  const { method, reqBody, submitText, SubmitIcon } = {
     method: editPromptData ? "PATCH" : "POST",
     submitText: editPromptData ? "Edit" : "Create",
+    SubmitIcon: editPromptData ? PencilSquareIcon : PlusIcon,
     reqBody: editPromptData
       ? { userDatabaseID, author, authorImg }
       : {
@@ -101,7 +106,7 @@ const Form = ({ editPromptData }: { editPromptData?: PromptFromDB }) => {
           Reset
         </button>
         <button className="btn-default flex gap-2 items-center" type="submit">
-          <PlusIcon width={22} />
+          <SubmitIcon width={22} />
           {submitText}
         </button>
       </div>

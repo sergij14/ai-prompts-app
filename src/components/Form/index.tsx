@@ -2,13 +2,16 @@
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Prompt } from "@/types";
+import { Prompt, PromptFromDB } from "@/types";
 import { useRouter } from "next/navigation";
 import { PlusIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
 import { promptSchema } from "./schemas";
 import { useSession } from "next-auth/react";
 
-const Form = () => {
+const Form = ({ editPromptData }: { editPromptData?: PromptFromDB }) => {
+  const { tag, prompt, _id, userDatabaseID, author, authorImg } =
+    editPromptData || {};
+
   const {
     register,
     handleSubmit,
@@ -16,27 +19,37 @@ const Form = () => {
     formState: { errors },
   } = useForm<Prompt>({
     resolver: yupResolver(promptSchema),
+    defaultValues: editPromptData ? { tag, prompt } : {},
   });
 
   const router = useRouter();
   const { data: session } = useSession();
+  const { user } = session || {};
 
   const handleReset = () => reset({ tag: "", prompt: "" });
 
-  const onSubmit = async (data: Prompt) => {
-    const { user } = session || {};
+  const { method, reqBody, submitText } = {
+    method: editPromptData ? "PATCH" : "POST",
+    submitText: editPromptData ? "Edit" : "Create",
+    reqBody: editPromptData
+      ? { userDatabaseID, author, authorImg }
+      : {
+          userDatabaseID: user?.userDatabaseID,
+          author: user?.username,
+          authorImg: user?.image,
+        },
+  };
 
+  const onSubmit = async (data: Prompt) => {
     try {
-      await fetch("/api/prompts", {
-        method: "POST",
+      await fetch(editPromptData ? `/api/prompts?id=${_id}` : "/api/prompts", {
+        method: method,
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...data,
-          userDatabaseID: user?.userDatabaseID,
-          author: user?.username,
-          authorImg: user?.image,
+          ...reqBody,
         }),
       });
 
@@ -89,7 +102,7 @@ const Form = () => {
         </button>
         <button className="btn-default flex gap-2 items-center" type="submit">
           <PlusIcon width={22} />
-          Create
+          {submitText}
         </button>
       </div>
     </form>

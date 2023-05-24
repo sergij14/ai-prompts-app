@@ -8,6 +8,7 @@ const Hero = () => {
           src="/ai.jpg"
           width="0"
           alt=""
+          priority
           height="0"
           sizes="100vw"
           className="absolute object-cover -z-10 left-0 top-0 w-full h-full"

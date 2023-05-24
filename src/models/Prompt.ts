@@ -1,6 +1,7 @@
+import { PromptFromDB } from "@/types";
 import { Schema, model, models } from "mongoose";
 
-const PromptSchema = new Schema({
+const PromptSchema = new Schema<PromptFromDB>({
   userDatabaseID: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -24,6 +25,8 @@ const PromptSchema = new Schema({
   },
 });
 
-const PromptModel = models.Prompt || model("Prompt", PromptSchema);
+const getModel = () => model("Prompt", PromptSchema);
 
-export default PromptModel;
+export const PromptModel = (models.Prompt || getModel()) as ReturnType<
+  typeof getModel
+>;

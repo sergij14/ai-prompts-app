@@ -1,4 +1,4 @@
-import { User } from "@/models/User";
+import { UserModel } from "@/models/User";
 import { UserFromDB } from "@/types";
 import { connectToDB } from "@/utils/connectToDB";
 import NextAuth from "next-auth/next";
@@ -17,14 +17,14 @@ const handler = NextAuth({
         await connectToDB();
 
         const userID = token.sub;
-        const sessionUser = await User.findOne({ userID });
+        const sessionUser = await UserModel.findOne({ userID });
 
         return {
           ...session,
           user: {
             ...session.user,
-            userDatabaseID: sessionUser._id.toString(),
-            username: sessionUser.username,
+            userDatabaseID: sessionUser?._id.toString(),
+            username: sessionUser?.username,
             userID,
           },
         };
@@ -44,10 +44,10 @@ const handler = NextAuth({
           login: UserFromDB["username"];
         };
 
-        const userExists = await User.findOne({ userID });
+        const userExists = await UserModel.findOne({ userID });
 
         if (!userExists) {
-          await User.create({
+          await UserModel.create({
             email: email,
             username: login,
             userID,

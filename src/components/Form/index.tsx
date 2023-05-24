@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Prompt, PromptFromDB } from "@/types";
+import { FormPrompt, PromptFromDB } from "@/types";
 import { useRouter } from "next/navigation";
 import {
   PlusIcon,
@@ -21,7 +21,7 @@ const Form = ({ editPromptData }: { editPromptData?: PromptFromDB }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Prompt>({
+  } = useForm<FormPrompt>({
     resolver: yupResolver(promptSchema),
     defaultValues: editPromptData ? { tag, prompt } : {},
   });
@@ -45,7 +45,7 @@ const Form = ({ editPromptData }: { editPromptData?: PromptFromDB }) => {
         },
   };
 
-  const onSubmit = async (data: Prompt) => {
+  const onSubmit = async (data: FormPrompt) => {
     try {
       await fetch(editPromptData ? `/api/prompts?id=${_id}` : "/api/prompts", {
         method: method,

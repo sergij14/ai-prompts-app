@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { User } from "@/types";
+import { Schema, model, models } from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema<User>({
   email: {
     type: String,
   },
@@ -17,4 +18,8 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-export const User = mongoose.models.User || mongoose.model("User", UserSchema);
+const getModel = () => model("User", UserSchema);
+
+export const UserModel = (models.User || getModel()) as ReturnType<
+  typeof getModel
+>;

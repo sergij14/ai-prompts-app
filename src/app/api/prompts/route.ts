@@ -1,4 +1,4 @@
-import PromptModel from "@/models/Prompt";
+import {PromptModel} from "@/models/Prompt";
 import { connectToDB } from "@/utils/connectToDB";
 
 export async function POST(req: Request) {

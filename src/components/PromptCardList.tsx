@@ -47,12 +47,12 @@ const PromptCardList = ({
 
   return (
     <div className="prompt-list">
-      {data.map(({ prompt, _id, tag, author, authorImg, userDatabaseID }) => {
+      {data.map(({ prompt, _id, tag, author, authorImg }) => {
         const promptID = _id?.toString();
 
         return (
-          <div key={_id} className="relative">
-            <div key={_id} className="prompt-card">
+          <div key={promptID} className="relative">
+            <div className="prompt-card">
               <div className="flex justify-between mb-4">
                 <div className="flex gap-2 justify-center items-center">
                   <Image

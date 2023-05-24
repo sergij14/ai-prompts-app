@@ -1,19 +1,27 @@
-export type Prompt = {
+import { Types } from "mongoose";
+
+export interface FormPrompt {
   prompt: string;
   tag: string;
-};
+}
 
-export type PromptFromDB = Prompt & {
+export interface Prompt extends FormPrompt {
   author: string;
   authorImg: string;
-  _id: string;
-  userDatabaseID: string;
-};
+  userDatabaseID: Types.ObjectId;
+}
 
-export type UserFromDB = {
+export interface PromptFromDB extends Prompt {
+  _id: Types.ObjectId;
+}
+
+export interface User {
   email: string | null;
   username: string;
   image: string;
   userID: string;
-  _id: string;
-};
+}
+
+export interface UserFromDB extends User {
+  _id: Types.ObjectId;
+}
